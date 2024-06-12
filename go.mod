@@ -1,4 +1,4 @@
-module github.com/havilcorp/yandex-gophkeeper-proto
+module github.com/yandex-gophkeeper-proto
 
 go 1.22.2
 
