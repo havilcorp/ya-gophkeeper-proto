@@ -1,4 +1,4 @@
-module ya-gophkeeper-proto
+module yandex-gophkeeper-proto
 
 go 1.22.2
 
