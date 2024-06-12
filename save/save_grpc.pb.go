@@ -19,126 +19,126 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Metric_Save_FullMethodName   = "/save.Metric/Save"
-	Metric_GetAll_FullMethodName = "/save.Metric/GetAll"
+	Save_Save_FullMethodName   = "/save.Save/Save"
+	Save_GetAll_FullMethodName = "/save.Save/GetAll"
 )
 
-// MetricClient is the client API for Metric service.
+// SaveClient is the client API for Save service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type MetricClient interface {
+type SaveClient interface {
 	Save(ctx context.Context, in *SaveRequest, opts ...grpc.CallOption) (*SaveResponse, error)
 	GetAll(ctx context.Context, in *GetAllRequest, opts ...grpc.CallOption) (*GetAllResponse, error)
 }
 
-type metricClient struct {
+type saveClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewMetricClient(cc grpc.ClientConnInterface) MetricClient {
-	return &metricClient{cc}
+func NewSaveClient(cc grpc.ClientConnInterface) SaveClient {
+	return &saveClient{cc}
 }
 
-func (c *metricClient) Save(ctx context.Context, in *SaveRequest, opts ...grpc.CallOption) (*SaveResponse, error) {
+func (c *saveClient) Save(ctx context.Context, in *SaveRequest, opts ...grpc.CallOption) (*SaveResponse, error) {
 	out := new(SaveResponse)
-	err := c.cc.Invoke(ctx, Metric_Save_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Save_Save_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *metricClient) GetAll(ctx context.Context, in *GetAllRequest, opts ...grpc.CallOption) (*GetAllResponse, error) {
+func (c *saveClient) GetAll(ctx context.Context, in *GetAllRequest, opts ...grpc.CallOption) (*GetAllResponse, error) {
 	out := new(GetAllResponse)
-	err := c.cc.Invoke(ctx, Metric_GetAll_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Save_GetAll_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// MetricServer is the server API for Metric service.
-// All implementations must embed UnimplementedMetricServer
+// SaveServer is the server API for Save service.
+// All implementations must embed UnimplementedSaveServer
 // for forward compatibility
-type MetricServer interface {
+type SaveServer interface {
 	Save(context.Context, *SaveRequest) (*SaveResponse, error)
 	GetAll(context.Context, *GetAllRequest) (*GetAllResponse, error)
-	mustEmbedUnimplementedMetricServer()
+	mustEmbedUnimplementedSaveServer()
 }
 
-// UnimplementedMetricServer must be embedded to have forward compatible implementations.
-type UnimplementedMetricServer struct {
+// UnimplementedSaveServer must be embedded to have forward compatible implementations.
+type UnimplementedSaveServer struct {
 }
 
-func (UnimplementedMetricServer) Save(context.Context, *SaveRequest) (*SaveResponse, error) {
+func (UnimplementedSaveServer) Save(context.Context, *SaveRequest) (*SaveResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Save not implemented")
 }
-func (UnimplementedMetricServer) GetAll(context.Context, *GetAllRequest) (*GetAllResponse, error) {
+func (UnimplementedSaveServer) GetAll(context.Context, *GetAllRequest) (*GetAllResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAll not implemented")
 }
-func (UnimplementedMetricServer) mustEmbedUnimplementedMetricServer() {}
+func (UnimplementedSaveServer) mustEmbedUnimplementedSaveServer() {}
 
-// UnsafeMetricServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to MetricServer will
+// UnsafeSaveServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SaveServer will
 // result in compilation errors.
-type UnsafeMetricServer interface {
-	mustEmbedUnimplementedMetricServer()
+type UnsafeSaveServer interface {
+	mustEmbedUnimplementedSaveServer()
 }
 
-func RegisterMetricServer(s grpc.ServiceRegistrar, srv MetricServer) {
-	s.RegisterService(&Metric_ServiceDesc, srv)
+func RegisterSaveServer(s grpc.ServiceRegistrar, srv SaveServer) {
+	s.RegisterService(&Save_ServiceDesc, srv)
 }
 
-func _Metric_Save_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Save_Save_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SaveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MetricServer).Save(ctx, in)
+		return srv.(SaveServer).Save(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Metric_Save_FullMethodName,
+		FullMethod: Save_Save_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MetricServer).Save(ctx, req.(*SaveRequest))
+		return srv.(SaveServer).Save(ctx, req.(*SaveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Metric_GetAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Save_GetAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAllRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MetricServer).GetAll(ctx, in)
+		return srv.(SaveServer).GetAll(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Metric_GetAll_FullMethodName,
+		FullMethod: Save_GetAll_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MetricServer).GetAll(ctx, req.(*GetAllRequest))
+		return srv.(SaveServer).GetAll(ctx, req.(*GetAllRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Metric_ServiceDesc is the grpc.ServiceDesc for Metric service.
+// Save_ServiceDesc is the grpc.ServiceDesc for Save service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Metric_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "save.Metric",
-	HandlerType: (*MetricServer)(nil),
+var Save_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "save.Save",
+	HandlerType: (*SaveServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Save",
-			Handler:    _Metric_Save_Handler,
+			Handler:    _Save_Save_Handler,
 		},
 		{
 			MethodName: "GetAll",
-			Handler:    _Metric_GetAll_Handler,
+			Handler:    _Save_GetAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

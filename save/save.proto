@@ -21,7 +21,7 @@ message GetAllResponse {
     repeated SaveRequest Items = 1;
 }
 
-service Metric {
+service Save {
     rpc Save(SaveRequest) returns (SaveResponse);
     rpc GetAll(GetAllRequest) returns (GetAllResponse);
 }
